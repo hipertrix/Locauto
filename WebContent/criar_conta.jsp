@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Locauto</title>
-</head>
-<body>
+<jsp:include page="/header.jsp" />
 
+
+
+<h1>Criar minha conta</h1>
+
+<hr />
+
+<div class="col-sm-6 col-sm-offset-3">
 
 <form role="form"  action="IndexControlador" method="post">
 
@@ -46,5 +47,6 @@
 				
 </form>
 
-</body>
-</html>
+</div>
+
+<jsp:include page="/footer.jsp" />

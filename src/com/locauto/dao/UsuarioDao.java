@@ -21,7 +21,7 @@ public class UsuarioDao extends DAO {
 		try {
 			
 			
-			declaracao = conexao.prepareStatement("INSERT INTO usuarios (cpf,nome,email,senha,cnh,tipo_usuario,status) "
+			declaracao = conexao.prepareStatement("INSERT INTO usuario (cpf,nome,email,senha,cnh,tipo_usuario,status) "
 							+ "VALUES (?,?,?,?,?,2,0)");
 			declaracao.setString(1, usuario.getCpf());
 			declaracao.setString(2, usuario.getNome()); 
