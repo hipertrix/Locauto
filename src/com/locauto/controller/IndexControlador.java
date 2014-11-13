@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.locauto.dao.UsuarioDao;
+import com.locauto.model.StatusUsuario;
 import com.locauto.model.Usuario;
  
 @WebServlet("/IndexControlador")
@@ -40,8 +41,16 @@ public class IndexControlador extends HttpServlet {
 		Usuario usuario ;
 		UsuarioDao usuarioDao;
 		
-		if (acao.equals("incluir")) {
-
+		if (acao.equals("logout")) { 
+			sessao.setAttribute("usuario", null);	 
+			
+			try {
+				response.sendRedirect("index.jsp");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}else if (acao.equals("incluir")) {
 			try { 
 				
 				//-- padrão para usuários (Clientes) 
@@ -52,7 +61,7 @@ public class IndexControlador extends HttpServlet {
 				
 				usuarioDao = new UsuarioDao();
 				usuarioDao.conectar();
-				sessao.setAttribute("mensagem", usuarioDao.novo_cliente(usuario));
+				sessao.setAttribute("error", usuarioDao.novo_usuario(usuario,0));
 				sessao.setAttribute("usuario", usuario);
 
 				try {
@@ -69,30 +78,38 @@ public class IndexControlador extends HttpServlet {
 				e1.printStackTrace();
 			}		
 			
-
-		}else if (acao.equals("consultar")) {
-			// -- Somente por CPF agora
-			String cpf = request.getParameter("cpf");
+		}else if (acao.equals("login")) {	
+			sessao.setAttribute("error", "");
+			
+			try {
 
 			usuarioDao = new UsuarioDao();
 			usuarioDao.conectar();
-			usuario = (Usuario) usuarioDao.consultar(cpf);
+			usuario = (Usuario) usuarioDao.login(request.getParameter("cpf"), request.getParameter("senha"));
 
-			if (usuario == null) {
-				sessao.setAttribute("mensagem", "CPF não encontrado");
+			if (usuario.getCpf() == null) {
+				sessao.setAttribute("error", "Usuário inválido. Verifique seu CPF e senha.");
+				getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+		
 			} else {
-				sessao.setAttribute("mensagem", "Usuario encontrado com sucesso");
-				sessao.setAttribute("usuario", usuario);				
+				if(usuario.getStatus()==1){
+					sessao.setAttribute("usuario", usuario);
+					response.sendRedirect("home.jsp");					
+					//getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);			
+				}else{
+					sessao.setAttribute("error","Seu acesso está bloqueado. Motivo " + StatusUsuario.get_tipo_usuario_by_index(usuario.getStatus()));
+					getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+					
+				}						
 			}
 			
-			try {
-				getServletContext().getRequestDispatcher("/consulta_usuario.jsp")
-						.forward(request, response);
+				
 			} catch (ServletException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			} 
+			} 		
+ 
 
 		}else{
 			sessao.setAttribute("mensagem", "Nenhuma ação foi selecionada");

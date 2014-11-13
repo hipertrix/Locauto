@@ -1,14 +1,14 @@
-<jsp:include page="/header.jsp" />
+<jsp:include page="/header_loged.jsp" />
 
 
 
-<h1>Criar minha conta</h1>
+<h1>Criar funcionário</h1>
 
 <hr />
 
 <div class="col-sm-6 col-sm-offset-3">
 
-<form role="form"  action="IndexControlador" method="post">
+<form role="form"  action="UserController" method="post">
 
   <div class="form-group">
     <label for="nome">Nome</label>
@@ -19,34 +19,24 @@
     <label for="cpf">CPF</label>
     <input type="text" class="form-control" name="cpf" id="cpf" placeholder="Entre com o seu CPF">
   </div>
-  
-  
-  <div class="form-group">
-    <label for="cnh">CNH</label>
-    <input type="text" class="form-control" name="cnh" id="cnh" placeholder="Digite sua CNH">
-  </div>
+   
     
   <div class="form-group">
-    <label for="email">Email address</label>
+    <label for="email">Email </label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Entre com seu e-mail">
   </div>
-  
+    
   <div class="form-group">
     <label for="senha">Senha</label>
     <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha">
   </div>
-  
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Concordo com os termos do Locauto
-    </label>
-  </div>
+   
   <button type="submit" class="btn btn-default">Enviar</button>
-  <input type="hidden" name="acao" value="incluir" /> 
+  <input type="hidden" name="acao" value="incluir_funcionario" /> 
   
 				
 </form>
 
 </div>
 
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/footer_loged.jsp" />

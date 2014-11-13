@@ -2,7 +2,7 @@ package com.locauto.model;
  
 
 public class TipoUsuario {
-	private static String[] tipo_usuario = new String[]{"Administrador","Funcionário","Cliente"};
+	private static String[] tipo_usuario = new String[]{"Cliente","Funcionário","Administrador"};
 	
 	public static String[] get_all_tipo_usuario() {
 		return tipo_usuario;		
