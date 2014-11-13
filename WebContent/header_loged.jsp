@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<%@ page import="com.locauto.model.Usuario"
+%>
+ <% Usuario user =  (Usuario) session.getAttribute("usuario"); %>
+ 
+ 
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,8 +14,6 @@
 
 </head>
 <body>
-
-
 
 
 <nav class="navbar navbar-default" role="navigation">
@@ -29,11 +32,61 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">      
       <ul class="nav navbar-nav navbar-right">
-     
+        <li><a href="#"><%= user.getNome() %> | <%= user.getTipoUsuarioNome() %></a></li> 
+        <li><a href="IndexControlador?acao=logout">Sair</a></li> 
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
+
+
 <div class="container">
+
+ 
+
+<div class="row">
+<div class="col-sm-3 left-area">
+
+<ul class="nav nav-pills nav-stacked"> 
+
+<% if(user.getTipo_usuario() == 0){ 
+
+		// acesso de usuário CLIENTE
+%>
+ 
+  <li  class="active"><a href="#">Reservar Veículo</a></li>
+  <li ><a href="#">Minhas reservas</a></li> 
+ 
+
+<% }else if(user.getTipo_usuario() == 1){ 
+
+		// Acesso de usuário FUNCIONARIO
+%>
+ 
+  <li ><a href="#">Reservas</a></li>
+  <li ><a href="#">Usuários</a></li>  
+  <li ><a href="#">Veículos</a></li>
+ 
+
+<% }else{ 
+	// Acesso de admin
+%>
+
+
+  <li ><a href="#">Reservas</a></li>
+  <li ><a href="#">Veículos</a></li>
+  <li ><a href="userlist.jsp">Usuários</a></li>
+  <li ><a href="#">Funcionários</a></li> 
+  <li ><a href="#">Administradores</a></li>  
+ 
+
+<% } %>
+</ul>
+
+</div>
+
+<div class="col-sm-9">
+
+
 

@@ -18,7 +18,6 @@ public abstract class DAO {
 		}
 		
 	}	
-	public abstract String incluir(Object obj);	
-	public abstract Object consultar(String key);	
-	public abstract Object consultarLivros(Object obj);	
+	
+	public abstract String novo_usuario(Object obj, int tipo) ;
 }
