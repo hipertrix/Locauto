@@ -6,6 +6,16 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/default.css">
+<style>
+ 
+html { 
+  background: url(img/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+</style>
 
 </head>
 <body>
@@ -36,4 +46,4 @@
 </nav>
 
 <div class="container">
-
+ 

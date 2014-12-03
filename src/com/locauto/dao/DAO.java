@@ -18,6 +18,5 @@ public abstract class DAO {
 		}
 		
 	}	
-	
-	public abstract String novo_usuario(Object obj, int tipo) ;
+	 
 }

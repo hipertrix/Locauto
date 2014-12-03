@@ -94,7 +94,14 @@ public class IndexControlador extends HttpServlet {
 			} else {
 				if(usuario.getStatus()==1){
 					sessao.setAttribute("usuario", usuario);
-					response.sendRedirect("home.jsp");					
+					
+					if(usuario.getTipo_usuario()==0){
+						response.sendRedirect("LocacaoControlador?acao=minhasreservas");	
+					}else{				
+							
+					response.sendRedirect("home.jsp");	
+					
+					}
 					//getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);			
 				}else{
 					sessao.setAttribute("error","Seu acesso está bloqueado. Motivo " + StatusUsuario.get_tipo_usuario_by_index(usuario.getStatus()));

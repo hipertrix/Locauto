@@ -37,7 +37,11 @@ public class Usuario {
 		senha=request.getParameter("senha");
 		
 		//tipo_usuario = Integer.parseInt(request.getParameter("tipo_usuario"));
-		//status= Integer.parseInt(request.getParameter("status"));
+		try{
+		status= Integer.parseInt(request.getParameter("status"));
+		}catch(Exception e){
+			
+		}
 		
 		
 		//-- campos incomuns, (requer valor default)

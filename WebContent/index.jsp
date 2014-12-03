@@ -1,30 +1,16 @@
+<%@page import="java.util.concurrent.ExecutionException"%>
 <jsp:include page="/header.jsp" />
 
-<h1>Bem vindo</h1>
-
-<hr />
- 
-<a href="criar_conta.jsp">Criar minha conta</a>
 
  
  <div class="row">
  <div class="col-sm-8">
+  
  
  </div>
   <div class="col-sm-4">
  
  
-  <% String error =  (String) session.getAttribute("error"); %>
-	
-<% if(!error.equals("")){ %>
-	
-	<div class="alert alert-danger">
-	
-	<%= error %>
-	</div>
-
-
-<% } %>
 
  
    
@@ -38,6 +24,11 @@
         <input type="hidden" name="acao" value="login" /> 
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+        
+        ou 
+        
+        <a href="criar_conta.jsp" class="btn btn-lg btn-danger btn-block">Criar conta</a>
+        
       </form>
  
     
@@ -45,6 +36,9 @@
     
  </div>
  </div>
+ 
+ <h1 class="msg-home">Alugue um veículo agora, com muita facilidade!</h1>
+ 
  
 
 

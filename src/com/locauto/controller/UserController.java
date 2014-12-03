@@ -36,7 +36,7 @@ public class UserController extends HttpServlet {
 
 
 	private void processaRequisicao(HttpServletRequest request,
-			HttpServletResponse response) {
+			HttpServletResponse response) throws IOException {
 
 		HttpSession sessao = request.getSession();
 
@@ -44,31 +44,62 @@ public class UserController extends HttpServlet {
 		
 		Usuario usuario ;
 		
+		try { 	
 		
-		if (acao.equals("incluir_funcionario")) {
-			try { 				
-				//-- padrão cadastra funcionário				
+		if (acao.equals("incluir_funcionario")) {						 			
 				usuario = new Usuario(request);	
 				sessao.setAttribute("error", create_user(usuario)); 
+				getServletContext().getRequestDispatcher("/novo_funcionario.jsp").forward(request, response);
 
-				try {
-					getServletContext().getRequestDispatcher("/novo_funcionario.jsp").forward(request, response);
-				} catch (ServletException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}		
-			 
+		}else if(acao.equals("update_user")){			
+	 			
+				usuario = new Usuario(request);	
+				sessao.setAttribute("error", update_user(usuario, (String) sessao.getAttribute("tmp_cpf") )); 
+				response.sendRedirect("UserController?acao=pesquisa_usuarios");
+	 
+			
+	 	}else if (acao.equals("edit_user") ) { 
+	 		 
+	 		
+	 		String chave = request.getParameter("cpf");
+	 		sessao.setAttribute("tmp_cpf", chave); // utilizado para o update		
+			UsuarioDao usuarioDao = new UsuarioDao();
+			usuarioDao.conectar();
+			usuario = (Usuario) usuarioDao.consultar(chave);
 
+			if (usuario == null) {
+				sessao.setAttribute("error", "Usuário não encontrado");
+				getServletContext().getRequestDispatcher("/userlist.jsp")
+							.forward(request, response);			 
+
+			} else {
+				sessao.setAttribute("mensagem", "Usuário encontrado com sucesso");
+				sessao.setAttribute("tmp_usuario", usuario);
+				getServletContext().getRequestDispatcher("/user_edit.jsp")
+							.forward(request, response);			 
+			} 
+		 	
+		
+		}else if (acao.equals("pesquisa_usuarios") ) { 
+		 
+				UsuarioDao usuarioDao = new UsuarioDao();
+				usuarioDao.conectar();				
+				sessao.setAttribute("usuarios", usuarioDao.pesquisaUsuarios(request.getParameter("search"), 0));
+		        getServletContext().getRequestDispatcher("/userlist.jsp")
+							.forward(request, response);
+				 
 		}else{
 			sessao.setAttribute("mensagem", "Nenhuma ação foi selecionada");
 		}	
+		
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ServletException e) {
+			 e.printStackTrace();
+		} catch (IOException e) {
+			 e.printStackTrace();
+		} 
 		
 	}
 	
@@ -79,5 +110,15 @@ public class UserController extends HttpServlet {
 			usuarioDao.conectar();			
 			return  usuarioDao.novo_usuario(usuario,usuario.getTipo_usuario());
 	}
+	
+	
+
+	private String update_user(Usuario usuario, String cpf){
+		 	UsuarioDao usuarioDao = new UsuarioDao();
+			usuarioDao.conectar();			
+			return  usuarioDao.update_user(usuario, cpf);
+	}
+	
+	 
 	
 }

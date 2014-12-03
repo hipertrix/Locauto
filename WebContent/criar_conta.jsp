@@ -7,7 +7,7 @@
 <hr />
 
 <div class="col-sm-6 col-sm-offset-3">
-
+<div class="well well-sm">
 <form role="form"  action="IndexControlador" method="post">
 
   <div class="form-group">
@@ -27,7 +27,7 @@
   </div>
     
   <div class="form-group">
-    <label for="email">Email address</label>
+    <label for="email">E-mail</label>
     <input type="email" class="form-control" id="email" name="email" placeholder="Entre com seu e-mail">
   </div>
   
@@ -46,7 +46,7 @@
   
 				
 </form>
-
+ </div>
 </div>
 
 <jsp:include page="/footer.jsp" />

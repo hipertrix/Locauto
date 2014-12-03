@@ -38,3 +38,10 @@
 	background-color: #e2e2e2;
 	min-height: 450px;
 }
+
+.msg-home{
+	font-size: 4em;
+	color: white;
+    text-shadow: 2px 2px 4px #000000;
+	text-align: center;
+}

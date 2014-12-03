@@ -29,6 +29,13 @@
  Sua conta ainda precisa ser ATIVADA para você fazer suas locações. 
  <br />Aguarde um e-mail com a ativação da sua conta.
  </p>
+ 
+ 
+<br />
+
+<a href="index.jsp" class="btn btn-default">Voltar para a página inicial</a>
+ 
+ 
   </div>
 </div>
 </div>
@@ -47,6 +54,13 @@
  <div class="panel panel-danger"> 
  <div class="panel-body"> 
    <%= error %>
+   
+   
+   
+<br />
+
+<a href="index.jsp">Voltar para a página inicial</a>
+   
   </div>
 </div>
 
@@ -55,10 +69,6 @@
 <% } %>
 
 </div>
-
-<br />
-
-<a href="index.jsp">Voltar para a página inicial</a>
 
 
 

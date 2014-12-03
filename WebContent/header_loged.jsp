@@ -54,9 +54,10 @@
 
 		// acesso de usuário CLIENTE
 %>
- 
-  <li  class="active"><a href="#">Reservar Veículo</a></li>
-  <li ><a href="#">Minhas reservas</a></li> 
+  
+  <li ><a href="locacao_new_client.jsp">Reservar Veículo</a></li>
+  <li ><a href="LocacaoControlador?acao=minhasreservas">Minhas reservas</a></li> 
+  
  
 
 <% }else if(user.getTipo_usuario() == 1){ 
@@ -64,9 +65,9 @@
 		// Acesso de usuário FUNCIONARIO
 %>
  
-  <li ><a href="#">Reservas</a></li>
-  <li ><a href="#">Usuários</a></li>  
-  <li ><a href="#">Veículos</a></li>
+  <li ><a href="LocacaoControlador?acao=search">Locações</a></li>
+  <li ><a href="VeiculoControlador?acao=search">Veículos</a></li>
+  <li ><a href="UserController?acao=pesquisa_usuarios">Usuários</a></li>
  
 
 <% }else{ 
@@ -74,12 +75,10 @@
 %>
 
 
-  <li ><a href="#">Reservas</a></li>
-  <li ><a href="#">Veículos</a></li>
-  <li ><a href="userlist.jsp">Usuários</a></li>
-  <li ><a href="#">Funcionários</a></li> 
-  <li ><a href="#">Administradores</a></li>  
- 
+  <li ><a href="LocacaoControlador?acao=search">Locações</a></li>
+  <li ><a href="VeiculoControlador?acao=search">Veículos</a></li>
+  <li ><a href="UserController?acao=pesquisa_usuarios">Usuários</a></li>
+  
 
 <% } %>
 </ul>
